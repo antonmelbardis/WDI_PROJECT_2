@@ -21,7 +21,7 @@ function commentsDelete(req, res) {
     comment.remove();
     article.save();
 
-    res.redirect(`/films/${article._id}`);
+    res.redirect(`/articles/${article._id}`);
   });
 }
 

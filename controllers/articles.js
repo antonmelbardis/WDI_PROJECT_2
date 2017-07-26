@@ -1,22 +1,21 @@
 const Article = require('../models/article');
-const genres = [
-  'Action',
-  'Adventure',
-  'Animation',
-  'Biography',
-  'Comedy',
-  'Crime',
-  'Documentary',
-  'Drama',
-  'Family',
-  'Fantasy',
-  'Horror',
-  'Romance',
-  'Sci',
-  'Sport',
-  'Thriller'
-];
+const User = require('../models/user');
+
 const scrape = require('../scrape');
+
+function usersShow(req, res) {
+  User
+    .findById(req.params.id)
+    .exec()
+    .then(user => {
+      Article
+        .find({ createdBy: user._id })
+        .exec()
+        .then(articles => {
+          res.render('users/show', { user, articles });
+        });
+    });
+}
 
 function articlesIndex(req, res, next) {
   Article
@@ -26,7 +25,7 @@ function articlesIndex(req, res, next) {
 }
 
 function articlesNew(req, res) {
-  res.render('articles/new', { genres });
+  res.render('articles/new');
 }
 
 function articlesCreate(req, res, next) {
@@ -73,7 +72,7 @@ function articlesEdit(req, res, next) {
   .findById(req.params.id)
   .then((article) => {
     if(!article) return res.status(404).render('statics/404');
-    res.render('articles/edit', { article, genres });
+    res.render('articles/edit', { article});
   })
   .catch(next);
 }
@@ -112,5 +111,6 @@ module.exports = {
   show: articlesShow,
   edit: articlesEdit,
   update: articlesUpdate,
-  delete: articlesDelete
+  delete: articlesDelete,
+  showuser: usersShow
 };

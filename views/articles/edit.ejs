@@ -3,35 +3,43 @@
 <form method="POST" action="/articles/<%= article.id %>">
   <input type="hidden" name="_method" value="PUT">
   <div class="form-group">
-    <label for="name">Name</label>
+    <label for="name">Title</label>
     <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="<%= article.name %>">
   </div>
+
   <div class="form-group">
-    <label for="releaseDate">Release Date</label>
-    <input type="date" name="releaseDate" id="releaseDate" class="form-control" value="<%= article.releaseDate %>">
+    <label for="content">Contents</label>
+    <textarea name="content" id="content" class="form-control" rows="14"><%= article.content %></textarea>
   </div>
-  <div class="form-group">
-    <label for="synopsis">Synopsis</label>
-    <textarea name="synopsis" id="synopsis" placeholder="Synopsis" class="form-control"><%= article.synopsis %></textarea>
-  </div>
-  <div class="form-group">
-    <label for="genre">Genre</label>
-    <select name="genre" id="genre" class="form-control select2">
-      <% genres.forEach((genre) => { %>
-        <option <% if(article.genre === genre) { %>selected<% } %>><%= genre %></option>
-      <% }) %>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="wikipedia">Wikipedia Link</label>
-    <input type="text" name="wikipedia" id="wikipedia" placeholder="Wikipedia Link" class="form-control" value="<%= article.wikipedia %>">
-  </div>
+
   <div class="form-group">
     <label>Images</label>
-    <input type="text" name="images[]" class="form-control" value="<%= article.images[0] %>">
-    <input type="text" name="images[]" class="form-control" value="<%= article.images[1] %>">
-    <input type="text" name="images[]" class="form-control" value="<%= article.images[2] %>">
+    <input type="text" name="images[]" class="form-control" value="<%= article.images %>">
+
   </div>
 
   <button class="btn btn-primary">Add</button>
 </form>
+<%#
+<form method="POST" action="/articles">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" placeholder="Name" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="description">Headline</label>
+    <input type="text" name="description" id="description" placeholder="Description" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="content">Content</label>
+    <textarea name="content" id="synopsis" placeholder="Content" class="form-control">News content</textarea>
+  </div>
+  </div>
+
+  <div class="form-group">
+    <label>Image</label>
+    <input type="text" name="images[]" class="form-control">
+  </div>
+
+  <button class="btn btn-primary">Add</button>
+</form>%>

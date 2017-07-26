@@ -5,38 +5,20 @@ function init(){
   // getCarouselInfo();
   getHead();
   getData();
-
-  // $.ajax({
-  //   url: 'http://news.bbc.co.uk',
-  //   type: 'GET',
-  //   success: function(res) {
-  //       var headline = $(res.responseText).find('a.tsh').text();
-  //       alert(headline);
-  //   }
-  // });
-
-  // $.ajax({
-  //      url:"http://rus.delfi.lv",
-  //      dataType: 'jsonp', // Notice! JSONP <-- P (lowercase)
-  //      success:function(json){
-  //          // do stuff with json (in this case an array)
-  //          alert("Success");
-  //      },
-  //      error:function(){
-  //          alert("Error");
-  //      }
-  // });
-
 }
-
 
 function getLatestHeadlines (){
   $
   .get(`https://newsapi.org/v1/articles?source=football-italia&sortBy=latest&apiKey=0be3820b0c504a99b398e8e09463baee`)
   .done(data2 =>{
     console.log(data2.articles);
-    for (var i = 0; i < 9; i++) {
-      $(`<img src="${data2.articles[i].urlToImage}"><h2 class="head" >${data2.articles[i].title}</h2><p>${data2.articles[i].description} ...</p><h1 hidden>${data2.articles[i].url}</h1>`).appendTo($(`#${i}`));
+    for (var i = 0; i < 8; i++) {
+      $(`<img src="${data2.articles[i].urlToImage}">
+      <h2 class="title">${data2.articles[i].title}</h2>
+      <p>${data2.articles[i].description}</p>
+      <h1 hidden>${data2.articles[i].url}</h1>
+
+      <button class="head">Read more...</button>`).appendTo($(`#${i}`));
     }
   });
 }
@@ -51,11 +33,10 @@ function getData (){
 
 function addListeners() {
   $('.head').click(function(e) {
-    var txt = $(e.target).text();
-    console.log(txt);
+    // var txt = $(e.target).text();
     var newImg = $(e.target).siblings('img').attr('src');
     console.log(newImg);
-    var newTitle = $(e.target).text();
+    var newTitle = $(e.target).parent().children('h2').text();
     console.log(newTitle);
     var newTxt = $(e.target).parent().children('p').text();
     console.log(newTxt);
@@ -79,14 +60,7 @@ function addListeners() {
 
 
 
-// function addToBE () {
-//   $('#addToBackend').on('click', function() {
-//
-//   })
-// }
-// <div class="carousel-caption">
-//   <h3>Chicago</h3>
-//   <p>Thank you, Chicago!</p>
-//   </div>
-//
-// <img src="https://www.fillmurray.com/300/200"><h2>huuuuj</h2><p>some description</p>
+// $(document).on({
+//     ajaxStart: function() { $body.addClass("loading");    },
+//      ajaxStop: function() { $body.removeClass("loading"); }
+// });

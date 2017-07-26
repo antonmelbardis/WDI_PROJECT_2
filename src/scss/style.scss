@@ -1,6 +1,31 @@
 // .row {
 //   border: solid 1px;
 // }
-a {
-  text-decoration: none;
+body {
+  background-color: #eaeaea;
 }
+main {
+  margin-top: 100px;
+  margin-bottom: 50px;
+
+}
+
+.col-lg-6 {
+    background-color: white;
+  margin-bottom: 20px;
+  // margin: 0 auto;
+}
+.navbar {
+  border: solid 1px;
+  background: #1c1d1e;
+  margin-bottom: 0px;
+}
+.nav-item {
+  color: orange;
+}
+
+.navbar .nav > li > a {
+  color:white;
+}
+
+//championat com color #ff5400 logo
