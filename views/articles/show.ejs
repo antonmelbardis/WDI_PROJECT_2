@@ -1,0 +1,35 @@
+</br>
+<img src="<%= article.images %>">
+<h1><%= article.name %></h1>
+
+</br>
+<p><%= article.content %></p>
+
+
+<h4>Creator</h4>
+<p><%= article.createdBy.username %></p>
+
+
+
+<h4>Comments</h4>
+
+<form action="/articles/<%= article._id %>" method="post">
+  <input type="text" name="body">
+  <input type="submit" value="Post Comment">
+</form>
+
+<ul>
+  <% article.comments.forEach(comment => { %>
+    <li>
+      <h5><a href="/users/<%= comment.user._id %>"><%= comment.user.username %></a></h5>
+      <p><%= comment.body %></p>
+
+      <% if (comment.user.id === locals.user.id || article.createdBy.id === locals.user.id ) { %>
+        <form action="/articles/<%= article._id %>/comments/<%= comment._id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input class="btn btn-danger" type="submit" value="Delete Comment">
+        </form>
+      <% } %>
+    </li>
+  <% }) %>
+</ul>

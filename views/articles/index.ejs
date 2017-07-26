@@ -1,0 +1,25 @@
+<h1>Latest headlines</h1>
+
+<a href="/articles/new" class="btn btn-primary">Add</a>
+
+<div class="row">
+  <% articles.forEach((article) => { %>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-img-top" style="background-image:url(<%= article.images[0] %>)" alt="<%= article.name %>"></div>
+        <div class="card-block">
+          <a href="/articles/<%= article.id %>">
+            <h4 class="card-title"><%= article.name %></h4>
+          </a>
+          <p class="card-text"><%= article.genre %></p>
+
+          <a href="/articles/<%= article.id %>/edit" class="btn btn-primary">Edit</a>
+          <form method="POST" action="/articles/<%= article.id %>">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>

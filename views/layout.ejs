@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Project 2</title>
-    <script src="/js/client.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="/css/style.css">
-  </head>
-  <body>
-    <main>
-      <%- body %>
-    </main>
-  </body>
-</html>
+<head>
+  <meta charset="utf-8">
+  <title>Project 2</title>
+  <% include ./partials/stylesheets %>
+</head>
+<body>
+  <% include ./partials/navbar %>
+  <main class="container">
+
+    <% if (locals.messages) { %>
+      <% for (const type in locals.messages) { %>
+        <p class="alert alert-<%= type %>"><%= messages[type] %></p>
+        <% } %>
+      <% } %>
+        <%- body %>
+      </main>
+      <% include ./partials/scripts %>
+    </body>
+    </html>
