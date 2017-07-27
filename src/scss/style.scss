@@ -1,31 +1,34 @@
-// .row {
-//   border: solid 1px;
-// }
+
 body {
   background-color: #eaeaea;
 }
-main {
-  margin-top: 100px;
-  margin-bottom: 50px;
+
+.col-lg-5 {
+  background-color: white;
 
 }
 
-.col-lg-6 {
-    background-color: white;
-  margin-bottom: 20px;
-  // margin: 0 auto;
-}
-.navbar {
-  border: solid 1px;
-  background: #1c1d1e;
-  margin-bottom: 0px;
-}
-.nav-item {
-  color: orange;
+.col-lg-12 {
+  background-color: white;
+
 }
 
-.navbar .nav > li > a {
-  color:white;
+.navbar-fixed-bottom {
+  background-color: #080808;
 }
 
-//championat com color #ff5400 logo
+
+.head {
+  margin-bottom:10px;
+}
+
+.btn-secondary {
+  color: #9d9d9d;
+  background-color: #222;
+  border-color: #9d9d9d; /*set the color you want here*/
+}
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
+  color: black;
+  background-color: #eaeaea;
+  border-color: black; /*set the color you want here*/
+}

@@ -5,16 +5,16 @@ const scrape = require('../scrape');
 
 function usersShow(req, res) {
   User
-    .findById(req.params.id)
+  .findById(req.params.id)
+  .exec()
+  .then(user => {
+    Article
+    .find({ createdBy: user._id })
     .exec()
-    .then(user => {
-      Article
-        .find({ createdBy: user._id })
-        .exec()
-        .then(articles => {
-          res.render('users/show', { user, articles });
-        });
+    .then(articles => {
+      res.render('users/show', { user, articles });
     });
+  });
 }
 
 function articlesIndex(req, res, next) {
@@ -34,24 +34,41 @@ function articlesCreate(req, res, next) {
   // launch scrape method in lib
   // assign result to variable
   // add variable to docvument to save
-  scrape.contentScrape(req.body.url, (data) => {
-    // console.log('data from scraper received');
-    req.body.content = data;
-    setTimeout(createArticle, 2000);
-    function createArticle() {
-      Article
-      .create(req.body)
-      .then(article => {
-        console.log(article);
-        if (req.body.APIarticle) {
-          res.json({ id: article._id });
-        } else {
-          res.redirect('/articles');
-        }
-      })
-      .catch(next);
-    }
-  });
+  if (req.body.url) {
+    scrape.contentScrape(req.body.url, (data) => {
+      // console.log('data from scraper received');
+      req.body.content = data;
+      setTimeout(createArticle, 2000);
+      function createArticle() {
+        console.log('reached');
+        Article
+        .create(req.body)
+        .then(article => {
+          console.log('reached');
+          console.log(article);
+          if (req.body.APIarticle) {
+            res.json({ id: article._id });
+          } else {
+            res.redirect('/articles');
+          }
+        })
+        .catch(next);
+      }
+    });
+  } else {
+    Article
+    .create(req.body)
+    .then(article => {
+      console.log('reached');
+      console.log(article);
+      if (req.body.APIarticle) {
+        res.json({ id: article._id });
+      } else {
+        res.redirect('/articles');
+      }
+    })
+    .catch(next);
+  }
 }
 
 function articlesShow(req, res, next) {

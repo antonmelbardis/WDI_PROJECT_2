@@ -8,9 +8,11 @@ function usersShow(req, res) {
     .then(user => {
       Article
         .find({ createdBy: user._id })
+        .populate('createdBy')
         .exec()
         .then(articles => {
-          res.render('users/show', { user, articles });
+          var loggedIn = res.locals.user;
+          res.render('users/show', { loggedIn, articles });
         });
     });
 }

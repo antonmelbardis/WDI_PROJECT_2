@@ -1,0 +1,76 @@
+<nav class="navbar navbar-toggleable-md  navbar-light bg-faded navbar-fixed-top">
+  <div class="container">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapse" aria-controls="collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">Football Articles</a>
+
+    <div class="collapse navbar-collapse" id="collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/articles">Articles</a>
+        </li>
+        <% if (locals.isLoggedIn) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hello <%= locals.user.username %></a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Log In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+
+    <%# <---logo here--->%>
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">DYNAMIC FOOTBALL</a>
+    </div>
+
+    <%# <---menu here-->%>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Dynamic Content</a></li>
+        <li><a href="/articles">Stored</a></li>
+        <li><a href="#">Another</a></li>
+
+        <%# <--drop down-->%>
+        <%# <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Profile <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Stored</a></li>
+            <li><a href="#">Another</a></li>
+            <li><a href="#">Test</a></li>
+          </ul>
+        </li>%>
+      </ul>
+
+      <%# <----right align--->%>
+          <% if (locals.isLoggenIn) { %>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="logout">Logout</a></li>
+          <li><a href="#">Hello <%= locals.user.username %></a></li>
+      </ul>
+          <% } else { %>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+      </ul>
+          <% } %>
+
+    </div>
+
+  </div>
+</nav>

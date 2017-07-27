@@ -5,6 +5,7 @@ function init(){
   // getCarouselInfo();
   getHead();
   getData();
+  // reAlign();
 }
 
 function getLatestHeadlines (){
@@ -13,15 +14,18 @@ function getLatestHeadlines (){
   .done(data2 =>{
     console.log(data2.articles);
     for (var i = 0; i < 8; i++) {
-      $(`<img src="${data2.articles[i].urlToImage}">
-      <h2 class="title">${data2.articles[i].title}</h2>
-      <p>${data2.articles[i].description}</p>
+      $(`<img src="${data2.articles[i].urlToImage}" class="img-responsive" style="margin-top: 15px">
+      <h2 class="title" style="text-align: left">${data2.articles[i].title}</h2></br>
+      <p style="text-align: left">${data2.articles[i].description}</p>
       <h1 hidden>${data2.articles[i].url}</h1>
-
-      <button class="head">Read more...</button>`).appendTo($(`#${i}`));
+      <div type="button" id="but" class="btn btn-secondary btn-lg btn-block head pull-down" style="padding-bottom:15px; position:relative; bottom:5px">Read more...</div>`).appendTo($(`#${i}`));
     }
   });
+
 }
+
+
+
 
 function getHead (){
   setTimeout(getLatestHeadlines, 200);
@@ -29,6 +33,10 @@ function getHead (){
 
 function getData (){
   setTimeout(addListeners, 1000);
+}
+
+function reAlign (){
+  setTimeout(buttonRealign(), 1000);
 }
 
 function addListeners() {
@@ -58,9 +66,10 @@ function addListeners() {
   });
 }
 
-
-
-// $(document).on({
-//     ajaxStart: function() { $body.addClass("loading");    },
-//      ajaxStop: function() { $body.removeClass("loading"); }
-// });
+function buttonRealign(){
+  $('.btn-secondary').each(function() {
+    var $this=$(this);
+    console.log('run');
+    $this.css('margin-top', $this.parent().height()-$this.height());
+  });
+}
